@@ -20,15 +20,12 @@ public class WebController {
 //        for (Currency currency : currencyList){
 //            System.out.println(currency);
 //        }
-            return "web/index";
+        return "web/index";
     }
 
-//    @RequestMapping(method = RequestMethod.GET, value = "/{value}-{from}-to-{to}")
-//    public BigDecimal convertCurrency(
-//            @PathVariable(name = "value") BigDecimal value,
-//            @PathVariable(name = "from") String from,
-//            @PathVariable(name = "to") String to
-//    ) {
-//
-//    }
+    @RequestMapping(method = RequestMethod.GET, value = "/converter")
+    public String converter() {
+        return "web/converter";
+    }
+
 }
