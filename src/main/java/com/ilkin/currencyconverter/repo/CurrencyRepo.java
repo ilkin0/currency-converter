@@ -1,9 +1,15 @@
 package com.ilkin.currencyconverter.repo;
 
-import com.ilkin.currencyconverter.model.Currency;
+import com.ilkin.currencyconverter.entity.Currency;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CurrencyRepo {
-    void resetTable();
+import java.util.Optional;
 
-    void insertCurrency(Currency currency);
+@Repository
+public interface CurrencyRepo extends CrudRepository<Currency, Long> {
+
+    @Query("select c from Currency c where c.code = :code")
+    Optional<Currency> getCurrencyByCode(String code);
 }

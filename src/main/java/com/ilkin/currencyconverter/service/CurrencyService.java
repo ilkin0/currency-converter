@@ -1,13 +1,14 @@
 package com.ilkin.currencyconverter.service;
 
-import com.ilkin.currencyconverter.model.Currency;
+import com.ilkin.currencyconverter.entity.Currency;
+import com.ilkin.currencyconverter.exception.generic.EntityNotFoundException;
 
 import java.util.List;
 
 public interface CurrencyService {
 
-    List<Currency> parseXML();
-    void resetTable();
-    void insertCurrencyListIntoDB(List<Currency> currencyList);
+    List<Currency> findAll() throws EntityNotFoundException;
+
+    Currency findByCode(String code) throws EntityNotFoundException;
 
 }

@@ -14,7 +14,8 @@ public class CurrencyConverterScheduler {
 
     @Scheduled(cron = "0 0 14 * * *")
     public void parseCurrencies() {
-        currencyService.resetTable();
-        currencyService.parseXML();
+//        Todo reset table before pare XML
+//        Todo parse new XML file
+//        Todo insert parsed XML to DB
     }
 }

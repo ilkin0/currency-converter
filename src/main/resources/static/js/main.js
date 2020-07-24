@@ -66,7 +66,7 @@ var app = new Vue({
         },
         updateInputs: function () {
             var selected;
-            for (i = 0; i < this.countries.length; i++) {
+            for (let i = 0; i < this.countries.length; i++) {
                 if (this.selected === this.countries[i].name) {
                     selected = this.countries[i];
                 }
