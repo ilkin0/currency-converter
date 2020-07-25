@@ -11,4 +11,5 @@ public interface CurrencyService {
 
     Currency findByCode(String code) throws EntityNotFoundException;
 
+    List<Currency> save(List<Currency> currencyList) throws EntityNotFoundException;
 }

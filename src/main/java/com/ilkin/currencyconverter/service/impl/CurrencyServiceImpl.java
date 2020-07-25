@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.IteratorUtils;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -29,4 +30,16 @@ public class CurrencyServiceImpl implements CurrencyService {
         return currencyRepo.getCurrencyByCode(code).orElseThrow(() -> new EntityNotFoundException(Currency.class, code));
     }
 
+    @Override
+    @Transactional
+    public List<Currency> save(List<Currency> currencyList) throws EntityNotFoundException {
+
+        if (currencyList.isEmpty()) throw new EntityNotFoundException(Currency.class);
+
+        for (Currency currency : currencyList) {
+            currencyRepo.save(currency);
+        }
+
+        return currencyList;
+    }
 }

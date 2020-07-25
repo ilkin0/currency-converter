@@ -1,20 +1,23 @@
 package com.ilkin.currencyconverter.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "CURRENCY")
 @Getter
 @Setter
 @ToString
@@ -45,5 +48,15 @@ public class Currency {
     @NotNull(message = "{currency.value.notnull}")
     @Digits(message = "{currency.value.digits}", integer = 1, fraction = 10)
     private BigDecimal valueForAZN;
+
+    @CreationTimestamp
+    @Column(name = "CREATED_TIME", updatable = false)
+    @JsonIgnore
+    private LocalDateTime createDateTime;
+
+    @UpdateTimestamp
+    @Column(name = "UPDATE_TIME", updatable = false)
+    @JsonIgnore
+    private LocalDateTime updateDateTime;
 
 }

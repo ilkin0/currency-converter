@@ -86,9 +86,13 @@ public class CurrencyServiceImplTests {
     }
 
     @Test
-    @DisplayName("parseXML")
-    public void parseXML(){
+    @DisplayName("save(List<Currency>)")
+    public void save() throws EntityNotFoundException {
 
+        when(currencyRepo.findAll()).thenReturn(expectedList);
 
+        List<Currency> save = currencyService.save(expectedList);
+
+        assertEquals(expectedList, save);
     }
 }

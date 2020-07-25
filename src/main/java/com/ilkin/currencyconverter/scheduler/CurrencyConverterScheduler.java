@@ -1,21 +1,34 @@
 package com.ilkin.currencyconverter.scheduler;
 
+import com.ilkin.currencyconverter.entity.Currency;
+import com.ilkin.currencyconverter.exception.generic.EntityNotFoundException;
+import com.ilkin.currencyconverter.repo.CurrencyRepo;
 import com.ilkin.currencyconverter.service.CurrencyService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
+import static com.ilkin.currencyconverter.util.CurrencyUtil.xmlParser;
+
 @Component
+@RequiredArgsConstructor
 public class CurrencyConverterScheduler {
 
-    @Autowired
-    private CurrencyService currencyService;
-
+    private final CurrencyRepo currencyRepo;
+    private final CurrencyService currencyService;
 
     @Scheduled(cron = "0 0 14 * * *")
-    public void parseCurrencies() {
-//        Todo reset table before pare XML
-//        Todo parse new XML file
-//        Todo insert parsed XML to DB
+    public void parseCurrencies() throws EntityNotFoundException {
+
+//        reset table before parse XML
+        currencyRepo.truncateTable();
+
+//         parse new XML file
+        List<Currency> currencyList = xmlParser();
+
+//         insert parsed XML to DB
+        currencyService.save(currencyList);
     }
 }
