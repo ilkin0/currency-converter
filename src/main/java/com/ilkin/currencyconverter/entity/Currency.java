@@ -46,7 +46,8 @@ public class Currency {
 
     @Column(name = "VALUE")
     @NotNull(message = "{currency.value.notnull}")
-    @Digits(message = "{currency.value.digits}", integer = 1, fraction = 10)
+//    TODO niye @Digits problem yaradir?
+//    @Digits(message = "{currency.value.digits}", integer = 1, fraction = 10)
     private BigDecimal valueForAZN;
 
     @CreationTimestamp

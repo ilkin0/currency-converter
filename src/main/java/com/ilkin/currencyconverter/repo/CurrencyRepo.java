@@ -1,14 +1,12 @@
 package com.ilkin.currencyconverter.repo;
 
 import com.ilkin.currencyconverter.entity.Currency;
-import org.hibernate.annotations.NamedNativeQuery;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.lang.annotation.Native;
-import java.util.List;
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Repository
@@ -19,6 +17,8 @@ public interface CurrencyRepo extends CrudRepository<Currency, Long> {
 
     @Query(value = "truncate CURRENCY restart identity", nativeQuery = true)
     @Modifying
+//    TODO niye transactional elave etmedikde islemir?
+    @Transactional
     void truncateTable();
 
 }

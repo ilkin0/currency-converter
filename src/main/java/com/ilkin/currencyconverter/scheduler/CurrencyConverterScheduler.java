@@ -20,6 +20,7 @@ public class CurrencyConverterScheduler {
     private final CurrencyService currencyService;
 
     @Scheduled(cron = "0 0 14 * * *")
+//    @Scheduled(fixedRate = 3600000)
     public void parseCurrencies() throws EntityNotFoundException {
 
 //        reset table before parse XML
