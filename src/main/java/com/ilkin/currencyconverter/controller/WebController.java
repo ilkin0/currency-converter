@@ -3,27 +3,28 @@ package com.ilkin.currencyconverter.controller;
 import com.ilkin.currencyconverter.entity.Currency;
 import com.ilkin.currencyconverter.exception.generic.EntityNotFoundException;
 import com.ilkin.currencyconverter.service.CurrencyService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.ilkin.currencyconverter.util.Constant.API_URL;
+
 
 @RestController
+@RequestMapping(API_URL)
+@RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:8081'")
 public class WebController {
 
-    @Autowired
-    CurrencyService currencyService;
+    private final CurrencyService currencyService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/")
+    @GetMapping
     public List<Currency> findAll() throws EntityNotFoundException {
         return currencyService.findAll();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{code}")
+    @GetMapping("/{code}")
     public Currency findByCode(@PathVariable("code") String code) throws EntityNotFoundException {
         return currencyService.findByCode(code);
     }
