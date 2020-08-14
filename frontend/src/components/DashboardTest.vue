@@ -1,7 +1,7 @@
 
 <template id="app">
   <ul>
-    <li v-for="currency in currencies">
+    <li v-for="currency in currencies" :key="currency.id">
       {{ currency.code }}
     </li>
   </ul>
@@ -15,6 +15,10 @@ new Vue({
   el: '#app',
   mounted() {
     api.getAll().then(response => console.log(response))
+    // (response => this.currencies = response.data)
+  },
+  data: {
+    currencies: null
   }
 })
 export default {

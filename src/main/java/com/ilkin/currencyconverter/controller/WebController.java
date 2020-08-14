@@ -14,7 +14,6 @@ import static com.ilkin.currencyconverter.util.Constant.API_URL;
 @RestController
 @RequestMapping(API_URL)
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:8081'")
 public class WebController {
 
     private final CurrencyService currencyService;
